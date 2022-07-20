@@ -5,31 +5,50 @@ using UnityEngine;
 public class CameraMover : MonoBehaviour
 {
     [SerializeField] private Transform _player;
-    [SerializeField] private float _freeHorizontalMovment = 0.15f;
-    [SerializeField] private float _freeVerticalMovment = 0.05f;
+    [SerializeField] private float _freeHorizontalMovment = 0.5f;
+    [SerializeField] private float _freeVerticalMovment = 0.3f;
 
 
     private void LateUpdate()
     {
         Vector3 delta = Vector3.zero;
 
-        delta.x = GetDelta(_player.position.x, transform.position.x, _freeHorizontalMovment);
-        delta.y = GetDelta(_player.position.y, transform.position.y, _freeVerticalMovment);
+        float deltaX = _player.position.x - transform.position.x;
+
+        if (deltaX > _freeHorizontalMovment || deltaX < -_freeHorizontalMovment)
+        {
+            if (transform.position.x < _player.position.x)
+                delta.x = deltaX - _freeHorizontalMovment;
+            else
+                delta.x = deltaX + _freeHorizontalMovment;
+        }
+
+        float deltaY = _player.position.y - transform.position.y;
+
+        if (deltaY > _freeVerticalMovment || deltaY < -_freeVerticalMovment)
+        {
+            if (transform.position.y < _player.position.y)
+                delta.y = deltaY - _freeVerticalMovment;
+            else
+                delta.y = deltaY + _freeVerticalMovment;
+        }
 
         transform.position += new Vector3(delta.x, delta.y, 0);
     }
 
-    private float GetDelta(float playerPositinAxis, float cameraPositionAxis, float size)
+    /*
+    private float GetDelta(float playerPositinAxis, float cameraPositionAxis, float sizeFreeMovment)
     {
         float deltaAxis = playerPositinAxis - cameraPositionAxis;
 
-        if (deltaAxis > size || deltaAxis < -size)
+        if (deltaAxis > sizeFreeMovment || deltaAxis < -sizeFreeMovment)
         {
             if (cameraPositionAxis < playerPositinAxis)
-                return deltaAxis - size;
+                return deltaAxis - sizeFreeMovment;
             else
-                return deltaAxis + size;
+                return deltaAxis + sizeFreeMovment;
         }
         return deltaAxis;
     }
+    */
 }

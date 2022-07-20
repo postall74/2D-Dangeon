@@ -41,6 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Floor
+    uniqueID: 2598579017
+    locked: 0
   - name: Actors
     uniqueID: 3848062931
+    locked: 0
+  - name: Wall
+    uniqueID: 3957263937
+    locked: 0
+  - name: Interactable
+    uniqueID: 1736472093
     locked: 0
