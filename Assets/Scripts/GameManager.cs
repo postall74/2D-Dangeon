@@ -8,45 +8,40 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     // Ressource
-    public List<Sprite> _playerSprites;
-    public List<Sprite> _weaponSprites;
-    public List<int> _weaponPrices;
-    public List<int> _experienceTable;
+    public List<Sprite> playerSprites;
+    public List<Sprite> weaponSprites;
+    public List<int> weaponPrices;
+    public List<int> experienceTable;
 
     // References
-    public Player _player;
+    public Player player;
+
+    public FloatingTextManager floatingTextManager;
 
     // Logic
-    public int _coins;
-    public int _experience;
+    public int coins;
+    public int experience;
 
-    private void Awake()
+    //Floating Text
+    public void ShowText(string message, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
     {
-        if (GameManager.Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        SceneManager.sceneLoaded += LoadState;
-        DontDestroyOnLoad(gameObject);
+        floatingTextManager.Show(message, fontSize, color, position, motion, duration);
     }
-    
-    /*
-     * int preferdSkin
-     * int coins
-     * int experience
-     * int weaponLevel
-     */
+
+    /// <summary>
+    /// int preferdSkin
+    /// int coins
+    /// int experience
+    /// int weaponLevel
+    /// </summary>
     public void SaveState()
     {
-       
+
         string data = "";
 
         data += "0" + "|";
-        data += _coins.ToString() + "|";
-        data += _experience.ToString() + "|";
+        data += coins.ToString() + "|";
+        data += experience.ToString() + "|";
         data += "0";
 
         PlayerPrefs.SetString("SaveState", data);
@@ -63,12 +58,22 @@ public class GameManager : MonoBehaviour
         string[] data = PlayerPrefs.GetString("SaveState").Split('|');
 
         //Change palyer skin
-        _coins = int.Parse(data[1]);
-        _experience = int.Parse(data[2]);
+        coins = int.Parse(data[1]);
+        experience = int.Parse(data[2]);
         //Change weapon level
     }
 
+    private void Awake()
+    {
+        if (GameManager.Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-
+        Instance = this;
+        SceneManager.sceneLoaded += LoadState;
+        DontDestroyOnLoad(gameObject);
+    }
 
 }

@@ -13,7 +13,7 @@ public class Chest : Collectable
         {
             Collected = true;
             GetComponent<SpriteRenderer>().sprite = _emptyChest;
-            Debug.Log($"Grand {_coinAmount} coins");
+            GameManager.Instance.ShowText($"{_coinAmount} coin(s)", 18, Color.white, transform.position, Vector3.up * 50, 3.0f);
         }
     }
 }
