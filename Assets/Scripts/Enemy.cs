@@ -62,7 +62,6 @@ public class Enemy : Mover
             if (hits[i].tag == "Fighters" && hits[i].name == "Player")
                 collideWithPlayer = true;
 
-
             hits[i] = null;
         }
     }

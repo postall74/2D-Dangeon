@@ -14390,7 +14390,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   damage: 1
-  pushForce: 3
+  pushForce: 5
 --- !u!1 &756232121
 GameObject:
   m_ObjectHideFlags: 0
@@ -14680,7 +14680,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPoint: 2
   maxHitPoint: 2
-  pushRecoverySpeed: 0.01
+  pushRecoverySpeed: 0.25
   experienceValue: 1
   triggerLenght: 0.25
   chaseLenght: 2
@@ -14851,7 +14851,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   damage: 1
-  pushForce: 3
+  pushForce: 5
 --- !u!1 &1220319488
 GameObject:
   m_ObjectHideFlags: 0
@@ -14864,6 +14864,7 @@ GameObject:
   - component: {fileID: 1220319490}
   - component: {fileID: 1220319492}
   - component: {fileID: 1220319491}
+  - component: {fileID: 1220319493}
   m_Layer: 0
   m_Name: weapon_0
   m_TagString: Untagged
@@ -14965,7 +14966,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   damagePoint: 1
-  pushForce: 3
+  pushForce: 5
   weaponLevel: 0
 --- !u!61 &1220319492
 BoxCollider2D:
@@ -14993,6 +14994,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.29}
   m_EdgeRadius: 0
+--- !u!95 &1220319493
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220319488}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c051f7de48e6a90409e5670e4c5f95c0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1467882999
 GameObject:
   m_ObjectHideFlags: 0
@@ -15167,7 +15188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPoint: 5
   maxHitPoint: 5
-  pushRecoverySpeed: 0.01
+  pushRecoverySpeed: 0.25
   experienceValue: 2
   triggerLenght: 0.3
   chaseLenght: 3
@@ -17647,7 +17668,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8631032995683988076, guid: 2818a80e5ffe24c429b2236e1abbcb90, type: 3}
       propertyPath: pushRecoverySpeed
-      value: 0.01
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8631032995683988077, guid: 2818a80e5ffe24c429b2236e1abbcb90, type: 3}
       propertyPath: m_RootOrder

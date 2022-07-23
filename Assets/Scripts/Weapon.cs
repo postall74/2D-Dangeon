@@ -14,6 +14,7 @@ public class Weapon : Collectable
     private SpriteRenderer spriteRenderer;
 
     //Swing
+    private Animator animator;
     private float coolDown = 0.5f;
     private float lastSwing;
 
@@ -21,6 +22,7 @@ public class Weapon : Collectable
     {
         base.Start();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     protected override void Update()
@@ -58,6 +60,6 @@ public class Weapon : Collectable
 
     private void Swing()
     {
-        Debug.Log("Swing");
+        animator.SetTrigger("Swing");
     }
 }
