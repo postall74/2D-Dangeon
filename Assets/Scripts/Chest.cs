@@ -5,7 +5,7 @@ using UnityEngine;
 public class Chest : Collectable
 {
     [SerializeField] private Sprite _emptyChest;
-    [SerializeField] private int _coinAmount = 10;
+    [SerializeField] private int _coinAmount = 0;
 
     protected override void OnCollect()
     {
@@ -13,6 +13,7 @@ public class Chest : Collectable
         {
             Collected = true;
             GetComponent<SpriteRenderer>().sprite = _emptyChest;
+            GameManager.Instance.coins += _coinAmount;
             GameManager.Instance.ShowText($"{_coinAmount} coin(s)", 25, Color.yellow, transform.position, Vector3.up * 50, 3.0f);
         }
     }
