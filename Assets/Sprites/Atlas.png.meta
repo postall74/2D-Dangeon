@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 99
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -2635,15 +2635,15 @@ TextureImporter:
       pillar_3: 199336603
       floor_6: 703781453
       player_11: -1970082376
-      wall_17: 337335925
       floor_0: 321716591
+      wall_15: 1709758907
       weapon_0: -59273493
       weapon_14: -1083642970
       enemy_1: -1142292005
       player_8: -335130547
       weapon_1: -173758021
       player_14: -1089375086
-      wall_15: 1709758907
+      wall_17: 337335925
       enemy_12: -999451862
       enemy_5: -1530563623
       weapon_15: 384126792

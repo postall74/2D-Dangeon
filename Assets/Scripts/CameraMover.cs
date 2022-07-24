@@ -8,6 +8,10 @@ public class CameraMover : MonoBehaviour
     [SerializeField] private float _freeHorizontalMovment = 0.5f;
     [SerializeField] private float _freeVerticalMovment = 0.3f;
 
+    private void Start()
+    {
+        _player = GameObject.Find("Player").transform;
+    }
 
     private void LateUpdate()
     {

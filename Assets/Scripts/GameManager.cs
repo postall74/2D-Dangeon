@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -22,11 +23,15 @@ public class GameManager : MonoBehaviour
     public int coins;
     public int experience;
 
+    public UnityAction OnLoadScene;
+
     //Floating Text
     public void ShowText(string message, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
     {
         floatingTextManager.Show(message, fontSize, color, position, motion, duration);
     }
+
+
 
     //Upgrade weapon
     public bool TryUpgradeWeapon()
@@ -132,6 +137,8 @@ public class GameManager : MonoBehaviour
 
         //Chage the weapon level
         weapon.SetLevelWeapon(int.Parse(data[3]));
+
+        player.transform.position = GameObject.Find("SpawnPoint").transform.position;
     }
 
     private void Awake()
@@ -147,4 +154,8 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= LoadState;
+    }
 }
