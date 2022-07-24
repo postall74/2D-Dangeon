@@ -69,7 +69,7 @@ public class Enemy : Mover
     protected override void Death()
     {
         Destroy(gameObject);
-        GameManager.Instance.experience += experienceValue;
+        GameManager.Instance.GrantExperience(experienceValue);
         GameManager.Instance.ShowText($"+{experienceValue} exp", 25, Color.magenta, transform.position, Vector3.up * 50, 1.5f);
     }
 }
