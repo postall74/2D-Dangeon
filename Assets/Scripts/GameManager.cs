@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,20 +19,39 @@ public class GameManager : MonoBehaviour
     public Player player;
     public Weapon weapon;
     public FloatingTextManager floatingTextManager;
+    public Slider hitPointBar;
+    public GameObject HUD;
+    public GameObject Menu;
 
     // Logic
     public int coins;
     public int experience;
 
     public UnityAction OnLoadScene;
+    
+    private void Awake()
+    {
+        if (GameManager.Instance != null)
+        {
+            Destroy(gameObject);
+            Destroy(player.gameObject);
+            Destroy(floatingTextManager.gameObject);
+            Destroy(HUD.gameObject);
+            Destroy(Menu.gameObject);
+            return;
+        }
+
+        Instance = this;
+        SceneManager.sceneLoaded += LoadState;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+    }
 
     //Floating Text
     public void ShowText(string message, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
     {
         floatingTextManager.Show(message, fontSize, color, position, motion, duration);
     }
-
-
 
     //Upgrade weapon
     public bool TryUpgradeWeapon()
@@ -50,13 +70,20 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
+    //HitpointBar
+    public void OnHitPointChange()
+    {
+        float ratio = (float)player.hitPoint / (float)player.maxHitPoint;
+        hitPointBar.normalizedValue = ratio;
+    }
+
     //Experience System
     public int GetCurrentLevel()
     {
         int returnValue = 0;
         int add = 0;
 
-        while(experience >= add)
+        while (experience >= add)
         {
             add += experienceTable[returnValue];
             returnValue++;
@@ -88,7 +115,7 @@ public class GameManager : MonoBehaviour
         int currentLevel = GetCurrentLevel();
         experience += exp;
 
-        if (currentLevel<GetCurrentLevel())
+        if (currentLevel < GetCurrentLevel())
             OnLevelUp();
     }
 
@@ -96,6 +123,14 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Level up!");
         player.OnLevelUp();
+        OnHitPointChange();
+    }
+
+    //On scene load
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        player.transform.position = GameObject.Find("SpawnPoint").transform.position;
     }
 
     /// <summary>
@@ -119,9 +154,11 @@ public class GameManager : MonoBehaviour
 
     public void LoadState(Scene scene, LoadSceneMode mode)
     {
+        SceneManager.sceneLoaded -= LoadState;
+
+
         if (!PlayerPrefs.HasKey("SaveState"))
         {
-            Debug.Log("SaveState");
             return;
         }
 
@@ -139,23 +176,5 @@ public class GameManager : MonoBehaviour
         weapon.SetLevelWeapon(int.Parse(data[3]));
 
         player.transform.position = GameObject.Find("SpawnPoint").transform.position;
-    }
-
-    private void Awake()
-    {
-        if (GameManager.Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        SceneManager.sceneLoaded += LoadState;
-        DontDestroyOnLoad(gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= LoadState;
     }
 }

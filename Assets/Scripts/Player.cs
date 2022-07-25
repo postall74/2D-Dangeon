@@ -13,9 +13,13 @@ public class Player : Mover
     {
         base.Start();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        DontDestroyOnLoad(gameObject);
     }
 
+    protected override void ReceiveDamage(Damage damage)
+    {
+        base.ReceiveDamage(damage);
+        GameManager.Instance.OnHitPointChange();
+    }
 
     private void FixedUpdate()
     {
@@ -42,5 +46,15 @@ public class Player : Mover
         {
             OnLevelUp();
         }
+    }
+
+    public void Heal()
+    {
+        if (hitPoint == maxHitPoint)
+            return;
+
+        GameManager.Instance.ShowText($"+{maxHitPoint - hitPoint} + HP", 25, Color.green, transform.position, Vector3.up * 50, 1.0f);
+        hitPoint = maxHitPoint;
+        GameManager.Instance.OnHitPointChange(); 
     }
 }

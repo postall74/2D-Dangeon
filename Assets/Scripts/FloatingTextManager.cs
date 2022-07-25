@@ -12,7 +12,6 @@ public class FloatingTextManager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
     }
 
     public void Show(string message, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
